@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: main
 
 # Controls when the action will run. 
 on:
@@ -37,7 +37,7 @@ jobs:
         run: |
         cp -R ./docs /tmp
 
-      - name: Checkout to gh-pages
+      - name: Checkout to ghpages
         uses: actions/checkout@v2
         with:
           ref: "gh-pages"
