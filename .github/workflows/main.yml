@@ -49,8 +49,8 @@ jobs:
 
       - name: Push
         env:
-        GITHUB_USER: "yhisaki"
-        GITHUB_EMAIL: "yhisaki31@gmail.com"
+          GITHUB_USER: "yhisaki"
+          GITHUB_EMAIL: "yhisaki31@gmail.com"
         run: |
           git config --local user.name "${GITHUB_USER}"
           git config --local user.email "${GITHUB_EMAIL}"
