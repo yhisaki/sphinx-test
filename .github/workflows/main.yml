@@ -44,16 +44,16 @@ jobs:
 
       - name: Remove and Copy docs
         run: |
-        rm -rf docs/
-        cp -R /tmp/docs ./
+          rm -rf docs/
+          cp -R /tmp/docs ./
 
       - name: Push
         env:
         GITHUB_USER: "yhisaki"
         GITHUB_EMAIL: "yhisaki31@gmail.com"
         run: |
-        git config --local user.name "${GITHUB_USER}"
-        git config --local user.email "${GITHUB_EMAIL}"
-        git add .
-        git commit -m "actions for pages"
-        git push origin gh-pages
+          git config --local user.name "${GITHUB_USER}"
+          git config --local user.email "${GITHUB_EMAIL}"
+          git add .
+          git commit -m "actions for pages"
+          git push origin gh-pages
