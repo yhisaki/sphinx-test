@@ -1,0 +1,59 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout to master
+        uses: actions/checkout@v2
+        with:
+          ref: "master"
+
+      # - name: Set up Python
+      #   uses: actions/setup-python@v1
+      #   with:
+      #     python-version: 3.7
+
+      - name: Copy docs to tmp
+        run: |
+        cp -R ./docs /tmp
+
+      - name: Checkout to gh-pages
+        uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+
+      - name: Remove and Copy docs
+        run: |
+        rm -rf docs/
+        cp -R /tmp/docs ./
+
+      - name: Push
+        env:
+        GITHUB_USER: "yhisaki"
+        GITHUB_EMAIL: "yhisaki31@gmail.com"
+        run: |
+        git config --local user.name "${GITHUB_USER}"
+        git config --local user.email "${GITHUB_EMAIL}"
+        git add .
+        git commit -m "actions for pages"
+        git push origin gh-pages
