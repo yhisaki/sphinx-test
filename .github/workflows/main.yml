@@ -35,7 +35,7 @@ jobs:
 
       - name: Copy docs to tmp
         run: |
-        cp -R ./docs /tmp
+          cp -R ./docs /tmp
 
       - name: Checkout to ghpages
         uses: actions/checkout@v2
