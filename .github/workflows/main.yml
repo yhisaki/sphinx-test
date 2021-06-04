@@ -40,7 +40,7 @@ jobs:
 
       - name: build documents
         run: |
-          cd docs && make html &&
+          cd docs && make html
 
       - name: Copy docs to tmp
         run: |
