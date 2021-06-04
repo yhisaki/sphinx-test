@@ -28,14 +28,23 @@ jobs:
         with:
           ref: "master"
 
-      # - name: Set up Python
-      #   uses: actions/setup-python@v1
-      #   with:
-      #     python-version: 3.7
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ./docs/docs_requirements.txt
+
+      - name: build documents
+        run: |
+          cd docs && make html &&
 
       - name: Copy docs to tmp
         run: |
-          cp -R ./docs /tmp
+          mv ./docs/build/html /tmp/docs
 
       - name: Checkout to ghpages
         uses: actions/checkout@v2
@@ -45,7 +54,7 @@ jobs:
       - name: Remove and Copy docs
         run: |
           rm -rf docs/
-          cp -R /tmp/docs ./
+          mv /tmp/docs ./docs
 
       - name: Push
         env:
